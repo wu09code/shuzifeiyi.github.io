@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>非遗传承人专属平台</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      background: #f9f7f2;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #c6a477, #8b6f47);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 2.8em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    }
+
+    header p {
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    section {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+
+    .section-title {
+      background: #5d4037;
+      color: white;
+      padding: 20px;
+      font-size: 1.8em;
+      text-align: center;
+    }
+
+    .input-area {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .input-area label {
+      font-weight: bold;
+      color: #4e342e;
+    }
+
+    .input-area input[type="text"] {
+      padding: 12px;
+      border: 2px solid #bcaaa4;
+      border-radius: 8px;
+      font-size: 1em;
+      outline: none;
+    }
+
+    .input-area input[type="text"]:focus {
+      border-color: #8b6f47;
+    }
+
+    .input-area button {
+      background: #8b6f47;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .input-area button:hover {
+      background: #6d4c41;
+    }
+
+    .upload-area {
+      border: 2px dashed #bcaaa4;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .upload-area p {
+      color: #7d7d7d;
+    }
+
+    .result-area {
+      padding: 20px 30px;
+      background: #fafafa;
+      min-height: 120px;
+      border-top: 1px solid #eee;
+      font-size: 1.1em;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    .sample-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      padding: 20px;
+    }
+
+    .sample-item {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .sample-item:hover {
+      transform: translateY(-6px);
+    }
+
+    .sample-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .sample-item .caption {
+      padding: 10px;
+      background: #fff;
+      text-align: center;
+      font-size: 0.9em;
+      color: #5d4037;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #3e2723;
+      color: #e0e0e0;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2em;
+      }
+      .section-title {
+        font-size: 1.5em;
+      }
+      .input-area, .result-area {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>非遗传承人数字工坊</h1>
+    <p>让传统技艺在数字时代焕发新生</p>
+  </header>
+
+  <div class="container">
+    <!-- 非遗溯源 -->
+    <section id="origin-section">
+      <div class="section-title">一、非遗溯源</div>
+      <div class="input-area">
+        <label for="heritage-input">请输入非遗名称或上传图片：</label>
+        <input type="text" id="heritage-input" placeholder="例如：苏绣、皮影戏、苗银..." />
+        <div class="upload-area" id="upload-origin">
+          <p>📷 点击上传相关图片</p>
+          <input type="file" id="file-origin" accept="image/*" style="display:none;" />
+        </div>
+        <button id="analyze-origin">生成起源与发展故事</button>
+      </div>
+      <div class="result-area" id="origin-result">
+        您的非遗项目将在这里展示其历史脉络与文化渊源……
+      </div>
+    </section>
+
+    <!-- 技艺解密 -->
+    <section id="technique-section">
+      <div class="section-title">二、技艺解密</div>
+      <div class="input-area">
+        <label for="technique-input">请输入非遗名称或上传制作过程图：</label>
+        <input type="text" id="technique-input" placeholder="例如：景泰蓝掐丝、剪纸步骤..." />
+        <div class="upload-area" id="upload-technique">
+          <p>📷 点击上传工艺细节图</p>
+          <input type="file" id="file-technique" accept="image/*" style="display:none;" />
+        </div>
+        <button id="analyze-technique">生成详细制作步骤</button>
+      </div>
+      <div class="result-area" id="technique-result">
+        制作流程将逐步呈现，帮助更多人学习与传承……
+      </div>
+    </section>
+
+    <!-- 让非遗“活”起来 -->
+    <section id="revive-section">
+      <div class="section-title">三、让非遗 “活” 起来</div>
+      <div class="input-area">
+        <label for="revive-input">请输入想创新的非遗项目：</label>
+        <input type="text" id="revive-input" placeholder="例如：青花瓷、扎染..." />
+        <div class="upload-area" id="upload-revive">
+          <p>📷 可上传代表作品图片</p>
+          <input type="file" id="file-revive" accept="image/*" style="display:none;" />
+        </div>
+        <button id="generate-style">生成多样化风格样例</button>
+      </div>
+      <div class="sample-gallery" id="style-gallery">
+        <!-- 示例图片占位 -->
+        <div class="sample-item">
+          <img src="https://bailian-bmp-pre.oss-cn-hangzhou.aliyuncs.com/public/system_agent/PlaceHolder.png" alt="现代风剪纸设计" />
+          <div class="caption">现代极简风剪纸</div>
+        </div>
+        <div class="sample-item">
+          <img src="https://bailian-bmp-pre.oss-cn-hangzhou.aliyuncs.com/public/system_agent/PlaceHolder.png" alt="国潮联名款陶瓷" />
+          <div class="caption">国潮联名陶瓷杯</div>
+        </div>
+        <div class="sample-item">
+          <img src="https://bailian-bmp-pre.oss-cn-hangzhou.aliyuncs.com/public/system_agent/PlaceHolder.png" alt="动漫IP融合刺绣" />
+          <div class="caption">动漫角色刺绣包</div>
+        </div>
+        <div class="sample-item">
+          <img src="https://bailian-bmp-pre.oss-cn-hangzhou.aliyuncs.com/public/system_agent/PlaceHolder.png" alt="数字艺术皮影" />
+          <div class="caption">数字光影皮影装置</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    &copy; 2025 非遗传承人数字工坊 | 致力于传统文化的数字化保护与创新传播
+  </footer>
+
+  <script>
+    // 绑定所有按钮和上传区域事件
+    document.addEventListener('DOMContentLoaded', function () {
+      // 非遗溯源功能
+      const originInput = document.getElementById('heritage-input');
+      const uploadOrigin = document.getElementById('upload-origin');
+      const fileOrigin = document.getElementById('file-origin');
+      const analyzeOriginBtn = document.getElementById('analyze-origin');
+      const originResult = document.getElementById('origin-result');
+
+      uploadOrigin.addEventListener('click', () => fileOrigin.click());
+      fileOrigin.addEventListener('change', () => {
+        if (fileOrigin.files.length > 0) {
+          uploadOrigin.innerHTML = `✅ 已上传: ${fileOrigin.files[0].name}`;
+        }
+      });
+
+      analyzeOriginBtn.addEventListener('click', () => {
+        const value = originInput.value.trim();
+        if (!value && !fileOrigin.files.length) {
+          alert('请先输入非遗名称或上传图片！');
+          return;
+        }
+        originResult.innerHTML = `<strong>【${value || '未知项目'}】的起源与发展：</strong><br><br>
+        据考证，该项目最早可追溯至中国古代XX时期（如唐代/明代），起源于XX地区。最初作为民间节庆/祭祀/生活用品而存在，承载着人们对自然、祖先或美好生活的敬意与祈愿。经过数百年的演变，融合了多地工艺特点，在清代被列为宫廷御用技艺之一。20世纪以来，随着社会变迁曾一度濒临失传，后经多位传承人努力得以保存，并于2006年被列入国家级非物质文化遗产名录。如今，它不仅是中国文化的象征之一，更走向国际舞台，成为中外文化交流的重要载体。`;
+      });
+
+      // 技艺解密功能
+      const techniqueInput = document.getElementById('technique-input');
+      const uploadTechnique = document.getElementById('upload-technique');
+      const fileTechnique = document.getElementById('file-technique');
+      const analyzeTechniqueBtn = document.getElementById('analyze-technique');
+      const techniqueResult = document.getElementById('technique-result');
+
+      uploadTechnique.addEventListener('click', () => fileTechnique.click());
+      fileTechnique.addEventListener('change', () => {
+        if (fileTechnique.files.length > 0) {
+          uploadTechnique.innerHTML = `✅ 已上传: ${fileTechnique.files[0].name}`;
+        }
+      });
+
+      analyzeTechniqueBtn.addEventListener('click', () => {
+        const value = techniqueInput.value.trim();
+        if (!value && !fileTechnique.files.length) {
+          alert('请先输入非遗名称或上传工艺图！');
+          return;
+        }
+        techniqueResult.innerHTML = `<strong>【${value || '该技艺'}】制作七步法：</strong><br><br>
+        1. <strong>选材备料</strong>：精选天然原材料（如蚕丝、陶土、竹篾）；<br>
+        2. <strong>初步塑形</strong>：手工揉捏或裁剪出基本轮廓；<br>
+        3. <strong>精细雕刻/绘制</strong>：使用专用工具进行纹样刻画；<br>
+        4. <strong>上色/染制</strong>：采用植物染料或矿物颜料多次浸染；<br>
+        5. <strong>干燥定型</strong>：阴干或低温烘干保持形态稳定；<br>
+        6. <strong>打磨抛光</strong>：手工打磨至表面光滑细腻；<br>
+        7. <strong>成品检验</strong>：由资深匠人逐件验收，确保品质统一。<br><br>
+        ⏳ 全程耗时约7-30天，每件均为独一无二的艺术品。`;
+      });
+
+      // 让非遗“活”起来功能
+      const reviveInput = document.getElementById('revive-input');
+      const uploadRevive = document.getElementById('upload-revive');
+      const fileRevive = document.getElementById('file-revive');
+      const generateStyleBtn = document.getElementById('generate-style');
+      const styleGallery = document.getElementById('style-gallery');
+
+      uploadRevive.addEventListener('click', () => fileRevive.click());
+      fileRevive.addEventListener('change', () => {
+        if (fileRevive.files.length > 0) {
+          uploadRevive.innerHTML = `✅ 已上传: ${fileRevive.files[0].name}`;
+        }
+      });
+
+      generateStyleBtn.addEventListener('click', () => {
+        const value = reviveInput.value.trim();
+        if (!value) {
+          alert('请输入想要创新的非遗项目名称！');
+          return;
+        }
+
+        const examples = [
+          { name: `现代几何风${value}`, img: 'https://bailian-bmp-pre.oss-cn-hangzhou.aliyuncs.com/public/system_agent/PlaceHolder.png' },
+          { name: `国潮联名款${value}`, img: 'https://bailian-bmp-pre.oss-cn-hangzhou.aliyuncs.com/public/system_agent/PlaceHolder.png' },
+          { name: `动漫IP融合${value}`, img: 'https://bailian-bmp-pre.oss-cn-hangzhou.aliyuncs.com/public/system_agent/PlaceHolder.png' },
+          { name: `数字光影${value}装置`, img: 'https://bailian-bmp-pre.oss-cn-hangzhou.aliyuncs.com/public/system_agent/PlaceHolder.png' },
+          { name: `环保材料${value}文创`, img: 'https://bailian-bmp-pre.oss-cn-hangzhou.aliyuncs.com/public/system_agent/PlaceHolder.png' },
+          { name: `AR互动${value}体验`, img: 'https://bailian-bmp-pre.oss-cn-hangzhou.aliyuncs.com/public/system_agent/PlaceHolder.png' }
+        ];
+
+        styleGallery.innerHTML = '';
+        examples.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'sample-item';
+          div.innerHTML = `
+            <img src="${item.img}" alt="${item.name}" />
+            <div class="caption">${item.name}</div>
+          `;
+          styleGallery.appendChild(div);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
